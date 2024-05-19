@@ -2,32 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* styles/AnimatedForm.module.css */
+.mainLoginContainer {
+    width: 600px;
+    display: flex;
+    border-radius: 15px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.loginContainer {
+    width: 300px;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.sideContainer {
+    width: 300px;
+    background: #000;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 900;
+    font-size: 30px;
+    padding: 15px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginContainerHeadng{
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+form input {
+    margin: 10px 0;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+form input:focus, form button:focus {
+    outline: none;
+    border-color: #0070f3;
+}
+
+button {
+    background-color: #0070f3;
+    color: white;
+    cursor: pointer;
+    width: 76px;
+    padding: 5px;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+.loginIcons{
+    text-align: center;
+    padding: 7px;
+    border: 3px solid #000;
+    color: #0070f3;
+    margin: 0 7px;
+    border-radius: 50%;
+    width: 39px;
 }
