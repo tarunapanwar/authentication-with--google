@@ -59,10 +59,12 @@ const Login = () => {
     }
   }
 
-  const onSignin = async() => {
+  const onSignin = async(e: any) => {
+    e.preventDefault();
     try{
         setLoading(true);
         const response = await axios.post<IApiResponse>('/api/users/login', user);
+        debugger;
         router.push('/');
     }
     catch(err) {
