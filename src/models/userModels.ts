@@ -16,8 +16,16 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password: {
+        type: String
+    },
+    authId: {
         type: String,
-        required: [true, "enter password"]
+        unique: true
+    },
+    provider: {
+        type: String,
+        enum: ["local", "google"],
+        default: "local"
     },
     isVarified: {
         type: Boolean,
@@ -32,6 +40,14 @@ const userSchema = new mongoose.Schema({
     verifyToken: String,
     verifyTokenExpiry: Date
 })
+
+// Pre-save hook to handle password requirement based on authId
+// userSchema.pre("save", function (next) {
+//     console.log(this.password, this.authId);
+//     if(!this.password && !this.authId)
+//         next(new Error('Password is required if authId is not provided'));
+//     else next();
+// })
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
 

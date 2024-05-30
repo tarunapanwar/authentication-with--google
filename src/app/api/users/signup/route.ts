@@ -23,9 +23,9 @@ export const POST = async(request: NextRequest) => {
             fullname,
             email,
             username,
-            password: hashedPassword
+            password: hashedPassword,
+            provider: "local"
         })
-
         const saveUser = await newUser.save();
 
         if(saveUser){

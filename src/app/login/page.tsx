@@ -3,6 +3,7 @@ import React from "react";
 import "../globals.css";
 import { useRouter } from "next/navigation";
 import { IApiResponse, IAuthantication } from "@/Interfaces/auth";
+import { signIn } from 'next-auth/react'
 import axios from "axios";
 
 export default function Home() {
@@ -11,11 +12,6 @@ export default function Home() {
   return (
     <>
       <div className="h-screen flex items-center justify-center bg-gray-100">
-        {/* <button 
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-          onClick={() => setShowDialog({ type: 'login'})}>
-          Login
-        </button> */}
         <Login />
       </div>
       {showDialog?.type === 'login' && <Login />}</>
@@ -37,7 +33,8 @@ const Login = () => {
   });
   const [isSignin, setSignin] = React.useState(true);
 
-  const onSignup = async() => {
+  const onSignup = async(e: any) => {
+    e.preventDefault()
     try{
         setLoading(true);
         const varifyPassword = user?.password === user?.confirmPassword;
@@ -45,7 +42,7 @@ const Login = () => {
         if(!varifyPassword) throw new Error('Password and Confirm Password must be same');
         if(!checkTerms) throw new Error('accept term & conditions');
         if(varifyPassword && checkTerms) {
-            const response = await axios.post<IApiResponse>('api/users/signup', { email: 'newtest@text.com', password: '123456' });
+            const response = await axios.post<IApiResponse>('api/users/signup', user);
             if(response && response?.data && response?.data?.success) setSignin(true);
             else throw new Error('Failed signup');
         }
@@ -139,8 +136,8 @@ const Login = () => {
               <div className="text-xs">New User?<b> Register</b></div>
               <hr className="border-t w-80 border-gray-300 my-5" />
               <div className="flex justify-center items center">
-                <div className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">G</div>
-                <div className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">L</div>
+                <div onClick={(e) => signIn('google')} className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">G</div>
+                <div onClick={(e) => {}} className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">L</div>
                 <div className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">T</div>
               </div>
             </div>

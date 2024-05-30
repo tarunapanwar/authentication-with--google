@@ -42,6 +42,7 @@ export const POST = async(request: NextRequest) => {
         return response;
     }
     catch(err: any){
+        console.log(err?.message);
         return NextResponse.json({error: err?.message}, {status: 500})
     }
 }

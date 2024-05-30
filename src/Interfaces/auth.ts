@@ -18,3 +18,9 @@ export interface IApiResponse {
     success: boolean,
     result?: any
 }
+
+export interface IAuthContextType {
+    user: string | null;
+    signIn: (user: string) => void;
+    signOut: () => void;
+}
