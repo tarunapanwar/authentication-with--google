@@ -43,7 +43,7 @@ const Login = () => {
         if(!checkTerms) throw new Error('accept term & conditions');
         if(varifyPassword && checkTerms) {
             const response = await axios.post<IApiResponse>('api/users/signup', user);
-            if(response && response?.data && response?.data?.success) setSignin(true);
+            if(response && response?.data && response?.data?.success) router.push('/');
             else throw new Error('Failed signup');
         }
         else throw new Error('Failed signup');
