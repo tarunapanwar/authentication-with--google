@@ -127,7 +127,7 @@ const Login = () => {
                   <span className=" text-xs ml-2 text-gray-700">Remember me</span>
                 </label>
                 <div className="flex items-center">
-                  <div className="text-xs text-blue-700">Forgot password</div>
+                  <div onClick={() => router.push('/forgotPassword')} className="text-xs text-blue-700">Forgot password</div>
                 </div>
               </div>
               <button onClick={onSignin} className="my-4 bg-blue-500 text-white cursor-pointer w-24 py-1 px-5 rounded-full mt-4" type="submit">Sign in</button>

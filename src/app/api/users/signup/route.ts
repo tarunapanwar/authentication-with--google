@@ -2,7 +2,6 @@ import { connect } from '@../../../src/dbConfig/dbConfig';
 import User from '@../../../src/models/userModels';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import nodemailer from 'nodemailer';
 import { sendEmail } from '@/utils/commonUtils';
 
 connect();
