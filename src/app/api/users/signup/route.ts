@@ -1,7 +1,9 @@
 import { connect } from '@../../../src/dbConfig/dbConfig';
 import User from '@../../../src/models/userModels';
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
+import nodemailer from 'nodemailer';
+import { sendEmail } from '@/utils/commonUtils';
 
 connect();
 
@@ -29,8 +31,9 @@ export const POST = async(request: NextRequest) => {
         const saveUser = await newUser.save();
 
         if(saveUser){
+            const res = sendEmail({email: email, subject: 'test subject', text: 'test text'});
             return NextResponse.json({
-                message: 'User created successfully',
+                message: 'User created successfully and mail sent successfully',
                 success: true,
                 result: saveUser
             })
