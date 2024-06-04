@@ -3,8 +3,8 @@ import React from "react";
 import "../globals.css";
 import { useRouter } from "next/navigation";
 import { IApiResponse, IAuthantication } from "@/Interfaces/auth";
-import { signIn } from 'next-auth/react'
 import axios from "axios";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   const [showDialog, setShowDialog] = React.useState<{type: 'login' | undefined, params?: any, onDismiss?: (v: any) => void}>();
@@ -49,7 +49,7 @@ const Login = () => {
         else throw new Error('Failed signup');
     }
     catch(err) {
-        console.log(err ?? 'Failed signup');
+        throw new Error(err as any ?? 'Failed signup');
     }
     finally{
         setLoading(false);
@@ -61,11 +61,11 @@ const Login = () => {
     try{
         setLoading(true);
         const response = await axios.post<IApiResponse>('/api/users/login', user);
-        debugger;
-        router.push('/');
+        if(response && response?.data && response?.data?.success) router.push('/');
+        else throw new Error("Failed to signin")
     }
     catch(err) {
-       console.log(err ?? 'Failed to signin'); 
+       throw new Error(err as any ?? 'Failed to signin'); 
     }
     finally{
         setLoading(false);
@@ -136,11 +136,11 @@ const Login = () => {
               <div className="text-xs">New User?<b> Register</b></div>
               <hr className="border-t w-80 border-gray-300 my-5" />
               <div className="flex items-center justify-center w-full cursor-pointer">
-                <div className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
+                <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
                   <img className="w-[20px]" src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google logo" />
                   <div className="pl-2">Google</div>
                 </div>
-                <div className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
+                <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
                   <img className="w-[20px]" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo" />
                   <div className="pl-2">Microsoft</div>
                 </div>

@@ -1,10 +1,11 @@
 "use client"
 import { IApiResponse } from "@/Interfaces/auth";
 import axios from "axios";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ResetPassword = () =>{
+    const router = useRouter();
     const [data, setData] = React.useState<{newPassword: string, confirmPassword: string, token: string}>({
         newPassword: '', 
         confirmPassword: '',
@@ -19,6 +20,7 @@ const ResetPassword = () =>{
             debugger;
             const token = window.location.href.split('/').pop();
             const res = await axios.post<IApiResponse>('/api/auth/resetPassword', {...data, token: token});
+            debugger;
             if(res && res.data && res.data.success) router.push('/login');
             else throw new Error('Failed to reset password');
         }

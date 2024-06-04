@@ -2,10 +2,11 @@
 import { IApiResponse } from "@/Interfaces/auth";
 import axios from "axios";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ResetPassword = () =>{
+    const router = useRouter();
     const [data, setData] = React.useState<{email: string}>({email: ''});
     const [loading, setLoading] = React.useState(false);
 
