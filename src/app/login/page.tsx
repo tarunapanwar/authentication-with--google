@@ -127,7 +127,7 @@ const Login = () => {
                   <span className=" text-xs ml-2 text-gray-700">Remember me</span>
                 </label>
                 <div className="flex items-center">
-                  <div onClick={() => router.push('/forgotPassword')} className="text-xs text-blue-700">Forgot password</div>
+                  <div onClick={() => router.push('/forgotPassword')} className="text-xs text-blue-700 cursor-pointer">Forgot password</div>
                 </div>
               </div>
               <button onClick={onSignin} className="my-4 bg-blue-500 text-white cursor-pointer w-24 py-1 px-5 rounded-full mt-4" type="submit">Sign in</button>
@@ -135,10 +135,15 @@ const Login = () => {
             <div className="flex flex-col items-center justify-between pt-4">
               <div className="text-xs">New User?<b> Register</b></div>
               <hr className="border-t w-80 border-gray-300 my-5" />
-              <div className="flex justify-center items center">
-                <div onClick={(e) => signIn('google')} className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">G</div>
-                <div onClick={(e) => {}} className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">L</div>
-                <div className="text-center p-2 border border-gray-300 text-blue-500 m-2 mt-0 rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:bg-gray-100 hover:border-gray-400 hover:text-blue-600">T</div>
+              <div className="flex items-center justify-center w-full cursor-pointer">
+                <div className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
+                  <img className="w-[20px]" src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google logo" />
+                  <div className="pl-2">Google</div>
+                </div>
+                <div className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
+                  <img className="w-[20px]" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo" />
+                  <div className="pl-2">Microsoft</div>
+                </div>
               </div>
             </div>
           </>
