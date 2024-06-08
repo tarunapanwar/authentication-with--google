@@ -49,7 +49,7 @@ const Login = () => {
         else throw new Error('Failed signup');
     }
     catch(err) {
-        throw new Error(err as any ?? 'Failed signup');
+        throw new Error(`${err}` ?? 'Failed signup');
     }
     finally{
         setLoading(false);
