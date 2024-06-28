@@ -17,10 +17,8 @@ const ResetPassword = () =>{
         e.preventDefault(); 
         try{
             setLoading(true); 
-            debugger;
             const token = window.location.href.split('/').pop();
             const res = await axios.post<IApiResponse>('/api/auth/resetPassword', {...data, token: token});
-            debugger;
             if(res && res.data && res.data.success) router.push('/login');
             else throw new Error('Failed to reset password');
         }

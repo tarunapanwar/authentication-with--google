@@ -3,6 +3,7 @@ import React from "react";
 import "./globals.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Header } from "./Components";
 
 export default function Home() {
   const router = useRouter();
@@ -26,16 +27,7 @@ export default function Home() {
   
   return (
     <div className="h-screen">
-      <div style={{height: '10%'}} className="flex item-center justify-end px-5">
-        <button 
-          className="my-4 bg-blue-500 text-white cursor-pointer w-50 py-1 px-5 rounded-full mt-4" 
-          type="submit"
-          onClick={handleLogout}
-        >Sign out</button>
-      </div>
-      <div style={{height: '90%'}} className="flex items-center justify-center bg-gray-100 text-blue-700 font-bold text-6xl">
-        Welcome to my new app 
-      </div>
+      <Header />
     </div>
   );
 }
