@@ -28,6 +28,14 @@ export default function Home() {
   return (
     <div className="h-screen">
       <Header />
+      <div className="relative h-35 w-full bg-cover bg-center" style={{ backgroundImage:`url('/pexels-thelazyartist-4164088.jpg')` }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div>
+            <p className="text-white text-9xl font-bold">Centered Text</p>
+            <button className="bg-white w-7 h-7.5">View Products</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

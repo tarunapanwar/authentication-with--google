@@ -14,6 +14,8 @@ const config: Config = {
       spacing: {
         '7.5': '1.688rem', // 30px
         '4.25': '1.125rem', // 17px
+        '35': '50rem',
+        '0.1': '0.1rem'
       },
       colors: {
         lightestGreen: '#686c4ce0'
