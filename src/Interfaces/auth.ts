@@ -4,13 +4,18 @@ export interface ILogin {
 }
 
 export interface IAuthantication {
+    title?: string;
     fullname: string;
+    displayName?: string;
     email: string;
     username: string;
     password: string;
-    confirmPassword: string;
+    confirmPassword: string;    
     confirmTermsAndConditions: boolean;
     isRememberUser: boolean;
+    pic?: string;
+    number: string;
+    about?: string;
 }
 
 export interface IApiResponse {

@@ -29,7 +29,8 @@ const Login = () => {
     password: '',
     confirmPassword: '',
     confirmTermsAndConditions: false,
-    isRememberUser: false
+    isRememberUser: false,
+    number: ''
   });
   const [isSignin, setSignin] = React.useState(true);
 
@@ -74,7 +75,7 @@ const Login = () => {
 
   return(
     <div className="flex items-center justify-center">
-      <div className='w-400 p-10 shadow-lg rounded-lg'>
+      <div className={`w-25 p-10 shadow-lg rounded-lg`}>
         <div className="flex flex-col justify-center items-center pb-10">
           <div className="flex items-center rounded-full w-60 bg-gray-300">
             <div onClick={(e) => setSignin(true)} className={`cursor-pointer text-center p-2 w-1/2 ${isSignin ? 'bg-blue-700 text-white rounded-full' : ''}`}>Sign in</div>
@@ -150,7 +151,7 @@ const Login = () => {
         ) : (
           <>
             <form className='flex flex-col items-center'>
-              <input 
+              {/* <input 
                 className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
                 type="text"
                 name="fullname" 
@@ -161,6 +162,24 @@ const Login = () => {
               />
               <input 
                 className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
+                type="text"
+                name="displayName" 
+                placeholder="Display Name"
+                value={user?.displayName}
+                onChange={(e) => setUser({ ...user, displayName: e?.currentTarget?.value })} 
+                required 
+              />
+              <input 
+                className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
+                type="number" 
+                name="number" 
+                placeholder="Number"
+                value={user?.number}
+                onChange={(e) => setUser({ ...user, number: e?.currentTarget?.value })} 
+                required 
+              /> */}
+              <input 
+                className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
                 type="email" 
                 name="email" 
                 placeholder="Email"
@@ -168,6 +187,15 @@ const Login = () => {
                 onChange={(e) => setUser({ ...user, email: e?.currentTarget?.value })} 
                 required 
               />
+              {/* <input 
+                className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
+                type="about" 
+                name="about" 
+                placeholder="About"
+                value={user?.about}
+                onChange={(e) => setUser({ ...user, about: e?.currentTarget?.value })} 
+                required 
+              /> */}
               <input 
                 className="my-4 px-2 pb-1 border-b border-gray-300 w-full" 
                 type="text" 
@@ -212,6 +240,19 @@ const Login = () => {
                 onClick={onSignup}
               >Sign up</button>
             </form>
+            <div className="flex flex-col items-center justify-between pt-4">
+              <hr className="border-t w-80 border-gray-300 my-5" />
+              <div className="flex items-center justify-center w-full cursor-pointer">
+                <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
+                  <img className="w-[20px]" src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google logo" />
+                  <div className="pl-2">Google</div>
+                </div>
+                <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
+                  <img className="w-[20px]" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo" />
+                  <div className="pl-2">Microsoft</div>
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>

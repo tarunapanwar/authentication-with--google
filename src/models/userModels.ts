@@ -1,22 +1,26 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    fullname: {
-        type: String,
-        required: [true, "enter name"]
-    },
+    title: String,
+    displayName: String,
+    fullname: String,
     email: {
         type: String,
         required: [true, "enter email"],
-        unique: true
+        unique: true,
+        lowercase: true,
+        trim: true
     },
     username: {
         type: String,
         required: [true, "enter username"],
-        unique: true
+        unique: true,
+        lowercase: true,
+        trim: true,
     },
     password: {
-        type: String
+        type: String,
+        required: [true, "enter password"]
     },
     authId: {
         type: String,
@@ -31,23 +35,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
-    verifyTokenExpiry: Date
-})
-
-// Pre-save hook to handle password requirement based on authId
-// userSchema.pre("save", function (next) {
-//     console.log(this.password, this.authId);
-//     if(!this.password && !this.authId)
-//         next(new Error('Password is required if authId is not provided'));
-//     else next();
-// })
+    verifyTokenExpiry: Date,
+    pic: String,
+    number: Number,
+    about: String
+}, { timestamps: true })
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
 

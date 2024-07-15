@@ -1,10 +1,14 @@
+import React from "react"
 import { BsArrowReturnLeft, BsCart2 } from "react-icons/bs"
 import { CiHeadphones, CiUser } from "react-icons/ci"
 import { LiaShippingFastSolid } from "react-icons/lia"
 import { RiHome4Line } from "react-icons/ri"
 import { VscHeart, VscSearch } from "react-icons/vsc"
+import { EditProfile } from "./EditProfile/Page"
 
 export const Header = () => {
+    const [showModel, setShowModel] = React.useState<{type: 'editUser' | undefined, params: any, onDismiss?: (val?: any) => void}>({type: undefined, params: {}});
+
     return (
         <>
             <div className="p-1 bg-customLightestGreen">
@@ -29,9 +33,10 @@ export const Header = () => {
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><VscSearch className="h-5 w-5" /></div>
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><VscHeart className="h-5 w-5" /></div>
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><BsCart2 className="h-5 w-5" /></div>
-                    <div className="px-2 text-lightestGreen text-sm cursor-pointer"><CiUser className="h-5 w-5" /></div>
+                    <div className="px-2 text-lightestGreen text-sm cursor-pointer" onClick={() => {setShowModel({type: 'editUser', params: {}})}}><CiUser className="h-5 w-5" /></div>
                 </div>
             </div>
+            {showModel?.type === 'editUser' && <EditProfile />}
         </>
     )
 }
