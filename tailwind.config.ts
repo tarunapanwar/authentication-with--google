@@ -20,7 +20,8 @@ const config: Config = {
         '47': '47.5rem'
       },
       colors: {
-        lightestGreen: '#686c4ce0'
+        lightestGreen: '#686c4ce0',
+        darkestGreen: '#2f7248'
       }
     },
   },

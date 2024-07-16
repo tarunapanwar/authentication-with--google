@@ -18,13 +18,15 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         trim: true,
     },
-    password: {
-        type: String,
-        required: [true, "enter password"]
-    },
+    password: String,
+    // password: {
+    //     type: String,
+    //     required: [true, "enter password"]
+    // },
     authId: {
         type: String,
-        unique: true
+        unique: true,
+        sparse: true
     },
     provider: {
         type: String,

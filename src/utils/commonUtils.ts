@@ -20,11 +20,9 @@ export const sendEmail = async ({email, subject, text}: {email: string, subject:
             subject: subject,
             text: text
         });
-        //console.log('Email send successfully');
         return NextResponse.json({message: 'Email send successfully', success: true})
     }
     catch(err){
-        //console.log('Failed to send email');
         return NextResponse.json({message: 'Failed to send email', success: false});
     }
 }

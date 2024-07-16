@@ -33,10 +33,59 @@ export const Header = () => {
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><VscSearch className="h-5 w-5" /></div>
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><VscHeart className="h-5 w-5" /></div>
                     <div className="px-2 text-lightestGreen text-sm cursor-pointer"><BsCart2 className="h-5 w-5" /></div>
-                    <div className="px-2 text-lightestGreen text-sm cursor-pointer" onClick={() => {setShowModel({type: 'editUser', params: {}})}}><CiUser className="h-5 w-5" /></div>
+                    <div className="px-2 text-lightestGreen text-sm cursor-pointer" 
+                        onClick={() => {
+                            setShowModel({
+                                type: 'editUser', 
+                                params: { recordId: "669617538a57ea57f523abc5" },
+                                onDismiss: (val) => {
+                                    setShowModel({type: undefined, params: {}})
+                                }
+                            })
+                        }}
+                    >
+                        <CiUser className="h-5 w-5" />
+                    </div>
                 </div>
             </div>
-            {showModel?.type === 'editUser' && <EditProfile />}
+            {showModel?.type === 'editUser' && 
+                <EditProfile 
+                    recordId={showModel?.params?.recordId}
+                    onDismiss={(v) => {
+                        if(showModel?.onDismiss) showModel?.onDismiss(v);
+                        else setShowModel({type: undefined, params: {}})
+                    }}
+                />
+            }
         </>
     )
 }
+
+interface ITextField {
+    name: String;
+    type?: String;
+    placeholder?: String;
+    isFieldNameHorizontal?: boolean;
+    title?: String;
+    value: any;
+    onChange: (v: any) => void; 
+}
+
+export const TextField = ({name, type, placeholder, title, isFieldNameHorizontal, value, onChange}: ITextField) => {
+    return(
+        <div className={isFieldNameHorizontal ? 'flex py-1' : 'py-1'}>
+            <div className="font-medium text-gray-500 text-sm pb-1">{title}</div>
+            <input 
+                className="p-1 border rounded border-gray-300 w-full" 
+                type={type ? `${type}` : 'text'}
+                name={`${name}`}
+                placeholder={placeholder ? `${placeholder}` : ''} 
+                value={value}
+                onChange={(e) => {if(onChange) onChange(e?.target?.value)}}
+                required 
+            />
+        </div>
+    )
+}
+
+
