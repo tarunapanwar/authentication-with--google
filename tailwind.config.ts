@@ -17,7 +17,8 @@ const config: Config = {
         '35': '50rem',
         '0.1': '0.1rem',
         '25': '25rem',
-        '47': '47.5rem'
+        '47': '47.5rem',
+        '-20': '-20px'
       },
       colors: {
         lightestGreen: '#686c4ce0',

@@ -38,7 +38,7 @@ export const POST = async(request: NextRequest) => {
         })
 
         response.cookies.set("token", token, { httpOnly: true })
-
+        response.cookies.set("userId", tokenData.id);
         return response;
     }
     catch(err: any){

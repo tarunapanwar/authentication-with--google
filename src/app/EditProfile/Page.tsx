@@ -11,9 +11,11 @@ interface IEditProps {
 }
 
 interface IProfile {
-    fullname: string,
-    displayName: string,
-    title: string
+    fullname?: string,
+    displayName?: string,
+    title?: string,
+    number?: string,
+    about?: string
 }
 
 export const EditProfile = ({recordId, onDismiss}: IEditProps) => {
@@ -44,7 +46,7 @@ export const EditProfile = ({recordId, onDismiss}: IEditProps) => {
     }
 
     return(
-        <div className='w-35 h-25 z-10 flex flex-col justify-between absolute top-40 left-1/2 transform -translate-x-1/2 bg-white rounded-lg p-2'>
+        <div className='shadow-2xl w-35 z-10 flex flex-col justify-between absolute top-40 left-1/2 transform -translate-x-1/2 bg-white rounded-lg p-2'>
             <div>
                 <div className="flex justify-between">
                     <h1 className='text-md p-1 font-bold text-gray-500'>Edit Profile</h1>
@@ -53,11 +55,13 @@ export const EditProfile = ({recordId, onDismiss}: IEditProps) => {
                 <hr className="w-full"/>
                 <div className="flex p-1">
                     <div className="w-3/4">
-                        <TextField title={'Full name'} name={'fullname'} value={values?.fullname} onChange={(e) => setValues({...values, fullname: e?.target?.value} as any) } />
-                        <TextField title={'Display name'} name={'displayName'} value={values?.displayName} onChange={(e) => setValues({...values, displayName: e?.target?.value} as any) } />
+                        <TextField title={'Full name'} name={'fullname'} value={values?.fullname} onChange={(v) => setValues({...values, fullname: v})} />
+                        <TextField title={'Display name'} name={'displayName'} value={values?.displayName} onChange={(v) =>  setValues({...values, displayName: v})} />
                         <div className="text-xs text-gray-400 py-1 font-medium">This could be your first name or nickname - however you'd like people to refer to you in Slack</div>
-                        <TextField title={'Title'} name={'title'} value={values?.title} onChange={(e) => { } } />
+                        <TextField title={'Title'} name={'title'} value={values?.title} onChange={(v) => setValues({...values, title: v})} />
                         <div className="text-xs text-gray-400 py-1 font-medium">Let people know what you do at workSpace</div>
+                        <TextField title={'Phone number'} name={'number'} value={values?.number} onChange={(v) => setValues({...values, number: v})} />
+                        <TextField title={'About'} name={'about'} value={values?.about} onChange={(v) => setValues({...values, about: v})} />
                     </div>
                     <div className="w-1/4 px-5">
                         <div className="float-right">

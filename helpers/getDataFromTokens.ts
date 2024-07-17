@@ -9,5 +9,6 @@ export const getDataFromToken = (request: NextRequest) => {
     }
     catch(err){
         console.log(err ?? 'Error in getting data from token');
+        return null;
     }
 }

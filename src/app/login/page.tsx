@@ -65,8 +65,8 @@ const Login = () => {
         if(response && response?.data && response?.data?.success) router.push('/');
         else throw new Error("Failed to signin")
     }
-    catch(err) {
-       throw new Error(err as any ?? 'Failed to signin'); 
+    catch(err: any) {
+       throw new Error(err?.response?.data?.error ?? 'Failed to signin'); 
     }
     finally{
         setLoading(false);

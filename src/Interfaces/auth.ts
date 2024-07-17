@@ -26,6 +26,6 @@ export interface IApiResponse {
 
 export interface IAuthContextType {
     user: string | null;
-    signIn: (user: string) => void;
-    signOut: () => void;
+    contextSignIn: (user: string) => void;
+    contextSignOut: () => void;
 }

@@ -9,7 +9,6 @@ export const GET = async(request: NextRequest, context: any) => {
         const {id} = context?.params;
         if(id){
             const user = await User.findById(id);
-            console.log('user', user);
             if(!user) return NextResponse.json({ error: 'User not found' }, { status: 400 });
             else {
                 const response = NextResponse.json({
@@ -38,10 +37,7 @@ export const PUT = async(req: NextRequest, context: any) => {
     try{
         const reqBody = await req.json();
         const { id } = context?.params;
-        // const {fullname, displayName, title, number, email, username, about} = reqBody;
         if(id){
-            // const updateUser = { id, ...reqBody };
-            console.log('update user...', reqBody);
             const updateUser = await User.findByIdAndUpdate(id, reqBody, {new: true});
             return NextResponse.json({
                 message: 'User updated successfully',
