@@ -8,13 +8,15 @@ export const POST = async(req: NextRequest) => {
     try{
         const reqBody = await req.json();
         if(reqBody){
-            const { logo, name, about } = reqBody;
+            const { teamName, logo, projectName, teamMembers, isAdmin } = reqBody;
             const newOrganization = new Organization ({
+                teamName,
                 logo,
-                name,
-                about,
-                isAdmin: true
+                projectName,
+                // teamMembers,
+                isAdmin
             });
+            console.log(newOrganization);
             const saveOrganization = await newOrganization.save();
             if(saveOrganization){
                 const response =  NextResponse.json({

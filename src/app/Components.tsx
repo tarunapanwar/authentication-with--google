@@ -5,7 +5,6 @@ import { LiaShippingFastSolid } from "react-icons/lia"
 import { RiHome4Line } from "react-icons/ri"
 import { VscHeart, VscSearch } from "react-icons/vsc"
 import { EditProfile } from "./EditProfile/Page"
-import { FaUser } from "react-icons/fa"
 
 export const Header = () => {
     const [showModel, setShowModel] = React.useState<{type: 'editUser' | undefined, params: any, onDismiss?: (val?: any) => void}>({type: undefined, params: {}});
@@ -70,9 +69,10 @@ interface ITextField {
     title?: String;
     value: any;
     onChange: (v: any) => void; 
+    onBlur?: (v: any) => void;
 }
 
-export const TextField = ({name, type, placeholder, title, isFieldNameHorizontal, value, onChange}: ITextField) => {
+export const TextField = ({name, type, placeholder, title, isFieldNameHorizontal, value, onChange, onBlur}: ITextField) => {
     return(
         <div className={isFieldNameHorizontal ? 'flex py-1' : 'py-1'}>
             <div className="font-medium text-gray-500 text-sm pb-1">{title}</div>
@@ -83,73 +83,9 @@ export const TextField = ({name, type, placeholder, title, isFieldNameHorizontal
                 placeholder={placeholder ? `${placeholder}` : ''} 
                 value={value}
                 onChange={(e) => {if(onChange) onChange(e?.target?.value)}}
+                onBlur={(e) => {if(onBlur) onBlur(e?.target?.value)}}
                 required 
             />
-        </div>
-    )
-}
-
-export const Step1 = () => {
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Enter your email</div>
-            <TextField name={'email'} value={''} onChange={() => {}} />
-        </div>
-    )
-}
-
-export const Step2 = () => {
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Enter code</div>
-            <div className="text-sm text-gray-500 py-2">We've sent a 6 digit code to email address the code expires shortly, so please enter it soon.</div>
-            <TextField name={'code'} value={''} onChange={() => {}} />
-        </div>
-    )
-}
-
-export const Step3 = () => {
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Enter your company or team name</div>
-            <TextField name={'companyName'} value={''} onChange={() => {}} />
-        </div>
-    )
-}
-
-export const Step4 = () => {
-    const imgRef = React.useRef<any>();
-
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Enter your name</div>
-            <TextField name={'name'} value={''} onChange={() => {}} />
-            <div className="w-1/4">
-                <div className="font-medium text-gray-500 text-sm pb-1">Profile photo</div>
-                <div className="w-full h-40 bg-darkestGreen border rounded-lg mb-2">
-                    <FaUser className="h-50 w-full text-white" style={{height:'100%',padding:"10px 5px 0px 5px"}}/>
-                </div>
-                <div className="w-full text-sm font-bold text-gray-400 border-2 border p-1 rounded-lg text-center cursor-pointer" onClick={(e) => imgRef?.current?.click()}>Upload Photo</div>
-                <input ref={imgRef} type="file" className="hidden"/>
-            </div>
-        </div>
-    )
-}
-
-export const Step5 = () => {
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Add your team members</div>
-            <TextField name={'teammembers'} value={''} onChange={() => {}} />
-        </div>
-    )
-}
-
-export const Step6 = () => {
-    return(
-        <div>
-            <div className="font-bold text-2xl text-gray-800">Add project name</div>
-            <TextField name={'projectname'} value={''} onChange={() => {}} />
         </div>
     )
 }
