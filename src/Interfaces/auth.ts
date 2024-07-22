@@ -16,6 +16,8 @@ export interface IAuthantication {
     pic?: string;
     number: string;
     about?: string;
+    code?: string;
+    token?: string;
 }
 
 export interface IApiResponse {

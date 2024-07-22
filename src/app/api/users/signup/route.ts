@@ -25,7 +25,8 @@ export const POST = async(request: NextRequest) => {
             email,
             username,
             password: hashedPassword,
-            provider: "local"
+            provider: "local",
+            isVarified: true
         })
         const saveUser = await newUser.save();
 

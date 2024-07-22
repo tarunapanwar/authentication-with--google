@@ -16,7 +16,6 @@ const AddOrganization = () => {
     teamName: '',
     logo: '',
     projectName: '',
-    // teamMembers: [{email: ''}],
     allTeamMembers: '',
     email: '',
     code: '',
@@ -138,44 +137,6 @@ const AddOrganization = () => {
           <div>
             <div className="font-bold text-2xl text-gray-800">Add your team members</div>
             <textarea className="border rounded-md w-full mt-2 resize-none p-2" name="allTeamMembers" rows={5} onChange={(e) => setInitialValues({ ...initialValues, allTeamMembers: e?.currentTarget?.value })} />
-            {/* {initialValues?.teamMembers && initialValues?.teamMembers?.length > 0 
-              && initialValues?.teamMembers?.map((itm: any, idx: number) => {
-                return(
-                  <div className="flex items-center justify-between">
-                      <div className="w-full">
-                        <TextField 
-                          name={'teammembers'} 
-                          value={itm?.email} 
-                          onChange={(v) => {
-                            let newTeamMembers = initialValues?.teamMembers?.map((itm: any, i: number) => {
-                                if(i === idx) return { ...itm, email: v }
-                                else return itm; 
-                              });
-                              setInitialValues({ ...initialValues, teamMembers: newTeamMembers });
-                            }} 
-                          onBlur={(v) => {
-                              let lastIdx = initialValues?.teamMembers && initialValues?.teamMembers?.length > 0 ? initialValues?.teamMembers?.length - 1 : 0;
-                              if(initialValues?.teamMembers![lastIdx]?.email) {
-                                let newTeamMembers = initialValues?.teamMembers?.map((itm: any, i: number) => {
-                                  if(i === idx) return { ...itm, email: v }
-                                  else return itm; 
-                                });
-                                setInitialValues({ ...initialValues, teamMembers: [...newTeamMembers!, {email: ''}] });
-                              }
-                            }} 
-                        />
-                      </div>
-                      {(initialValues?.teamMembers?.length! - 1) !== idx ? <div className="w-10 h-10 p-2">
-                          <RxCross2 className="w-6 h-6 text-red-700" onClick={(e) => {
-                            let newTeammembers = initialValues?.teamMembers?.filter((itm: any, index: number) => index !== idx);
-                            setInitialValues({...initialValues, teamMembers: newTeammembers});
-                          }}
-                        />
-                      </div> : <div className="w-10 h-10 p-2" />}
-                  </div>
-                )
-              })
-            } */}
           </div>
           : <div>
               <div className="font-bold text-2xl text-gray-800">Add project name</div>

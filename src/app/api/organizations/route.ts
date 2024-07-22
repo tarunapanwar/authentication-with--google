@@ -36,7 +36,7 @@ export const POST = async(req: NextRequest) => {
                     })
                 }
                 if(notExistingEmails && notExistingEmails?.length > 0){
-                    const createAccUrl = `${process.env.domain}/login`;
+                    const createAccUrl = `${process.env.domain}/signup`;
                     sendEmail({
                         email: notExistingEmails, 
                         subject: `Accept ${teamName} invitation to Slack`, 
