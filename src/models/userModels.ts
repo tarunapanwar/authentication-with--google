@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     provider: {
         type: String,
-        enum: ["local", "google"],
+        enum: ["local", "google", "workspace"],
         default: "local"
     },
     isVarified: {
@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
     verifyTokenExpiry: Date,
     pic: String,
     number: Number,
-    about: String
+    about: String,
 }, { timestamps: true })
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);

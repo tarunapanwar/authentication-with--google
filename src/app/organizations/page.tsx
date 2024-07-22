@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
 import "../globals.css";
-import { useRouter } from "next/navigation";
 import { TextField } from "../Components";
 import { FaUser } from "react-icons/fa";
 import { IOrganization } from "@/Interfaces/organization";
@@ -17,7 +16,8 @@ const AddOrganization = () => {
     teamName: '',
     logo: '',
     projectName: '',
-    teamMembers: [{email: ''}],
+    // teamMembers: [{email: ''}],
+    allTeamMembers: '',
     email: '',
     code: '',
     isAdmin: [{id: '', name: ''}]
@@ -137,7 +137,8 @@ const AddOrganization = () => {
           : currentStep?.step === 5 ? 
           <div>
             <div className="font-bold text-2xl text-gray-800">Add your team members</div>
-            {initialValues?.teamMembers && initialValues?.teamMembers?.length > 0 
+            <textarea className="border rounded-md w-full mt-2 resize-none p-2" name="allTeamMembers" rows={5} onChange={(e) => setInitialValues({ ...initialValues, allTeamMembers: e?.currentTarget?.value })} />
+            {/* {initialValues?.teamMembers && initialValues?.teamMembers?.length > 0 
               && initialValues?.teamMembers?.map((itm: any, idx: number) => {
                 return(
                   <div className="flex items-center justify-between">
@@ -174,7 +175,7 @@ const AddOrganization = () => {
                   </div>
                 )
               })
-            }
+            } */}
           </div>
           : <div>
               <div className="font-bold text-2xl text-gray-800">Add project name</div>
