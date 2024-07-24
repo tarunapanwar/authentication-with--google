@@ -90,4 +90,26 @@ export const TextField = ({name, type, placeholder, title, isFieldNameHorizontal
     )
 }
 
+interface IConfirmationModel {
+    message: string,
+    onDismiss: (val?: any) => void
+}
+
+export const ConfirmationModel = ({message, onDismiss}: IConfirmationModel) => {
+    const [loading, setLoading] = React.useState(false);
+
+    return(
+        <div className="flex w-full h-screen bg-black bg-opacity-50 items-center justify-center absolute inset-0">
+            <div className="flex flex-col items-center justify-between w-25 p-10 border rounded-lg shadow-lg bg-white">
+                <div className="text-sm pb-10">{message}</div>
+                <div className="border-t w-full pt-2">
+                    <div className="float-right">
+                        <button className="border bg-gray-100 py-1 px-5 rounded mr-2" disabled={loading} onClick={(e) => onDismiss()}>Cancel</button>
+                        <button className="border bg-darkestGreen text-white py-1 px-5 rounded" disabled={loading} onClick={(e) => onDismiss(true)}>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 

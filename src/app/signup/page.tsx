@@ -85,6 +85,20 @@ export default function Signup() {
                     {currentStep === 1 && (
                         <div className="w-full">
                             <TextField placeholder={'Enter you email'} name={'email'} value={initialValues?.email} onChange={(v: any) => setInitialValues({...initialValues, email: v})} />
+                            <div className="flex flex-col items-center justify-between pt-4">
+                                <div className="text-xs"><b>Or</b></div>
+                                {/* <hr className="border-t w-80 border-gray-300 my-5" /> */}
+                                <div className="flex items-center justify-center w-full cursor-pointer mt-5">
+                                    <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
+                                        <img className="w-[20px]" src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google logo" />
+                                        <div className="pl-2">Google</div>
+                                    </div>
+                                    <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
+                                        <img className="w-[20px]" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo" />
+                                        <div className="pl-2">Microsoft</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div> 
                     )}  
                     {currentStep === 2 && (
@@ -112,9 +126,9 @@ export default function Signup() {
                     )}  
                     <div className="w-full mt-10 pt-2">
                         <div className="float-right">
-                            {currentStep !== 1 && currentStep !== 3 && <button className="border bg-gray-100 py-1 px-5 rounded mr-2" onClick={() => setCurrentStep((prev) => (prev <= steps.length ? prev - 1 : prev))}>Back</button>}
+                            {currentStep !== 1 && currentStep !== 3 && <button className="border bg-gray-100 py-1 px-5 rounded-full mr-2" onClick={() => setCurrentStep((prev) => (prev <= steps.length ? prev - 1 : prev))}>Back</button>}
                             <button 
-                                className="border bg-darkestGreen text-white py-1 px-5 rounded" 
+                                className="border bg-darkestGreen text-white py-1 px-5 rounded-full" 
                                 onClick={(e: any) => {
                                     if(currentStep === 1) {
                                         if(initialValues && initialValues?.email) sendVerificationCode(initialValues?.email);
@@ -126,19 +140,6 @@ export default function Signup() {
                                     } else onSignup(e, initialValues!);
                                 }}
                             >{currentStep !== 3 ? `Continue` : `Submit`}</button>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-between pt-4">
-                        <hr className="border-t w-80 border-gray-300 my-5" />
-                        <div className="flex items-center justify-center w-full cursor-pointer">
-                            <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1">
-                            <img className="w-[20px]" src="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png" alt="Google logo" />
-                            <div className="pl-2">Google</div>
-                            </div>
-                            <div onClick={(e) => signIn('google')} className="flex justify-center items-center border-2 border-gray-300 rounded px-3 py-1 ml-5 cursor-pointer">
-                            <img className="w-[20px]" src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft logo" />
-                            <div className="pl-2">Microsoft</div>
-                            </div>
                         </div>
                     </div>
                 </div> 
