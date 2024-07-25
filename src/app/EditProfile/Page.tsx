@@ -17,7 +17,8 @@ interface IProfile {
     number?: string,
     about?: string,
     file?: any,
-    profilePicture?: string
+    profilePicture?: string,
+    isPicUploaded?: boolean
 }
 
 export const EditProfile = ({ recordId, onDismiss }: IEditProps) => {
@@ -31,7 +32,7 @@ export const EditProfile = ({ recordId, onDismiss }: IEditProps) => {
             const getUser = async () => {
                 const response = await axios.get(`api/users/signup/${recordId}`);
                 if (response && response?.data && response?.data?.success && response?.data?.result) {
-                    setValues({...response?.data?.result, profilePicture: `data:image/jpeg;base64,${response?.data?.result?.profilePicture}`});
+                    setValues({...response?.data?.result, profilePicture: response?.data?.result?.profilePicture ? `data:image/jpeg;base64,${response?.data?.result?.profilePicture}` : undefined, isPicUploaded: response?.data?.result?.profilePicture ? true : false});
                 }
             }
             getUser();
@@ -105,9 +106,20 @@ export const EditProfile = ({ recordId, onDismiss }: IEditProps) => {
                                     onClick={(e) => setShowModel({ 
                                         type: 'confirm', 
                                         params: {message: 'Are you sure, you want to delete your photo'}, 
-                                        onDismiss: (val: any) => {
+                                        onDismiss: async (val: any) => {
                                             if(val){
-                                                alert('delete file');
+                                                if(values?.isPicUploaded){
+                                                    const response = await axios.delete(`api/users/signup/${recordId}`);
+                                                    if(response && response?.data && response?.data?.success) {
+                                                        setValues({...values, profilePicture: undefined});
+                                                        alert('Profile removed successfully');
+                                                    }
+                                                    else alert('Failed to remove profile')
+                                                } 
+                                                else {
+                                                    setValues({...values, profilePicture: undefined});
+                                                    alert('Profile removed successfully');
+                                                }
                                             } else setShowModel({ type: undefined, params: {} })
                                         } 
                                     })}>Remove Photo</button>

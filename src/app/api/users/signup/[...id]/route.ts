@@ -3,6 +3,7 @@ import User from '@../../../src/models/userModels';
 import { NextRequest, NextResponse } from 'next/server';
 import { BlobServiceClient } from "@azure/storage-blob";
 import { StreamToBuffer } from '@/utils/commonUtils';
+import { error } from 'console';
 
 connect();
 
@@ -111,9 +112,24 @@ export const PUT = async(req: NextRequest, context: any) => {
 
 export const DELETE = async(req: NextRequest, context: any) => {
     try{
-        // if(!id)
+        const { id } = context?.params;
+        if(!id) NextResponse.json({ error: "Invalid record id" }, { status: 400 });
+        const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.CONNECTION_STRING!);
+        const containerClient = blobServiceClient.getContainerClient(process.env.CONTAINER_NAME!);
+        const folderPath = 'user-uploads'; 
+        const fileName = `${folderPath}/${id}/profile`; 
+        const blockBlobClient = containerClient.getBlockBlobClient(fileName);
+        const response = await blockBlobClient.delete();
+        if(response?.errorCode) return NextResponse.json({ error: "Failed to remove profile" }, { status: 400 });
+        const res = await User.findByIdAndUpdate(id, { $unset: { pic: "" } }, { new: true });
+        if(!res?.id) return NextResponse.json({ error: "Failed to remove profile" }, { status: 400 });
+        return NextResponse.json({
+            message: 'Profile removed successfully',
+            success: true,
+            result: response
+        })
     } 
     catch(err: any){
-        return NextResponse.json({error: err?.message}, {status: 500})
+        return NextResponse.json({ error: err?.message }, { status: 500 })
     }
 }
