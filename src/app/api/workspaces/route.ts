@@ -1,5 +1,5 @@
 import { connect } from '@../../../src/dbConfig/dbConfig';
-import Organization from '@/models/Organization';
+import Workspace from '@/models/Workspace';
 import User from '@/models/userModels';
 import { NextRequest, NextResponse } from 'next/server';
 import { sendEmail } from '@/utils/commonUtils';
@@ -10,9 +10,9 @@ export const POST = async(req: NextRequest) => {
     try{
         const reqBody = await req.json();
         if(reqBody){
-            const { teamName, logo, projectName, allTeamMembers, isAdmin, email } = reqBody;
-            const newOrganization = new Organization ({
-                teamName,
+            const { name, logo, projectName, allTeamMembers, isAdmin, email } = reqBody;
+            const newWorkspace = new Workspace ({
+                name,
                 logo,
                 projectName,
                 isAdmin
@@ -24,8 +24,8 @@ export const POST = async(req: NextRequest) => {
             const documents = notExistingEmails?.map((newUser: any) => {
                 return new User({ email: newUser, username: newUser?.split('@')[0], provider: 'workspace' });
             });
-            const workspaceOrganizations = await User.insertMany(documents);
-            if(workspaceOrganizations && workspaceOrganizations?.length > 0){
+            const workspaces = await User.insertMany(documents);
+            if(workspaces && workspaces?.length > 0){
                 const existingEmailList = Array.from(existingEmails)
                 if(existingEmails){
                     const slackOpenUrl = `${process.env.domain}/login`;
@@ -39,23 +39,23 @@ export const POST = async(req: NextRequest) => {
                     const createAccUrl = `${process.env.domain}/signup`;
                     sendEmail({
                         email: notExistingEmails, 
-                        subject: `Accept ${teamName} invitation to Slack`, 
-                        text: `${teamName} (${email}) has invited you to use Slack with them, in a workspace called ${projectName}. Join slack ${createAccUrl}.`
+                        subject: `Accept ${projectName} invitation`, 
+                        text: `${name} (${email}) has invited you to use Slack with them, in a workspace called ${projectName}. Join slack ${createAccUrl}.`
                     })
                 }
-                const saveOrganization = await newOrganization.save();
-                if(saveOrganization){
+                const saveWorkspace = await newWorkspace.save();
+                if(saveWorkspace){
                     const response =  NextResponse.json({
                         message: 'Workspace created successfully and mail sent successfully',
                         success: true,
                         result: {
-                            id: saveOrganization?._id,
-                            name: saveOrganization?.name
+                            id: saveWorkspace?._id,
+                            name: saveWorkspace?.name
                         }
                     });
                     if(response) return response;
                     else return NextResponse.json({message: 'Something went wrong'}, {status: 400})
-                }
+                } else NextResponse.json({ error: "Failed to save " })
             }
         }
     }
