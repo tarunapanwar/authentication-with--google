@@ -1,7 +1,8 @@
-import { AppBar, Box, Container, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Container, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import AdbIcon from '@mui/icons-material/Adb';
-import { AccountCircle } from "@mui/icons-material";
+import { AccountCircle, CheckBox } from "@mui/icons-material";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 interface ITextField {
     name: String;
@@ -90,6 +91,54 @@ export const Header = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
+        </>
+    )
+}
+
+// tables   
+  const rows = [
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+    { id: 1, task: 'Send bulk emails and join link on add workspac', owner: 'taruna', status: 'In Progress', priority: 'High', TaskDueDate: '12/05/2025', githubLink: 'www.google.com' },
+  ];
+
+export const DashboardHome = () => {
+    return (
+        <>
+            <div style={{ height: 'auto', width: '100%' }}>
+                <TableContainer component={Paper}>
+                    <Table sx={{minWidth: 650}}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell width={'5%'}><CheckBox /></TableCell>
+                                <TableCell width={'45%'}>Task</TableCell>
+                                <TableCell width={'10%'}>Owner</TableCell>
+                                <TableCell width={'10%'}>Status</TableCell>
+                                <TableCell width={'10%'}>Priority</TableCell>
+                                <TableCell width={'10%'}>Task due date</TableCell>
+                                <TableCell width={'10%'}>GitHub link</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableCell component="th" scope="row"><CheckBox /></TableCell>
+                                    <TableCell>{row?.task}</TableCell>
+                                    <TableCell>{row?.owner}</TableCell>
+                                    <TableCell>{row?.status}</TableCell>
+                                    <TableCell>{row?.priority}</TableCell>
+                                    <TableCell>{row?.TaskDueDate}</TableCell>
+                                    <TableCell>{row?.githubLink}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </>
     )
 }

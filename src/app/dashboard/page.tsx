@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import "./globals.css";
+import "../globals.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
@@ -23,6 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { AccountCircle } from "@mui/icons-material";
+import { DashboardHome } from "../Components";
 
 const drawerWidth = 240;
 
@@ -223,7 +224,10 @@ const Home = () => {
         </List> */}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        
+        <DrawerHeader />
+        <Typography paragraph>
+          <DashboardHome />
+        </Typography>
       </Box>
     </Box>
   );
